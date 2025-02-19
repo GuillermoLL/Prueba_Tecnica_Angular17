@@ -40,5 +40,20 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ts-standard": "12.0.2",
     "typescript": "~5.4.2"
+  },
+  "eslintConfig": {
+    "rules": {
+      "@typescript-eslint/no-extraneous-class": "off",
+      "@typescript-eslint/no-unnecessary-boolean-literal-compare": "off"
+    },
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "ignorePatterns": [
+      "node_modules/"
+    ]
   }
 }

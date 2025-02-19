@@ -3,12 +3,14 @@ Este proyecto esta utilizando la version de Angular 17.3.8
 
 ## Lanzar el proyecto
 
-Primero instala todas las dependencias
+Primero asegurate de que estas en la version de node 18.17.0
+
+Despues, instala todas las dependencias
 ```console
 npm install
 ```
 
-Lanza el proyecto
+Y lanza el proyecto
 ```console
 npm run start
 ```
