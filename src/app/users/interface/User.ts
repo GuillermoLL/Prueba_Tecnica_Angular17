@@ -1,3 +1,19 @@
+export interface Response<T> {
+  'page': number
+  'per_page': number
+  'total': number
+  'total_pages': number
+  'data': T
+  'support': {
+    'url': string
+    'text': string
+  }
+}
+
+export interface EditResponse extends User {
+  'updatedAt': string
+}
+
 export interface User {
   'id': number
   'email': string
@@ -6,14 +22,4 @@ export interface User {
   'avatar': string
 }
 
-export interface UserResponse {
-  'page': number
-  'per_page': number
-  'total': number
-  'total_pages': number
-  'data': User[]
-  'support': {
-    'url': string
-    'text': string
-  }
-}
+export type UserResponse = Pick<Response<User>, 'data' | 'support'>

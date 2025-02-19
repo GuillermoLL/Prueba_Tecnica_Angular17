@@ -17,12 +17,33 @@ import { HttpClientModule } from '@angular/common/http'
 export class UsersComponent implements OnInit, OnDestroy {
   usersList: User[] = []
   $subscriptions: Subscription[] = []
+  loading = true
 
   constructor (private readonly usersService: UsersService) { }
 
   ngOnInit (): void {
+    this.usersService.getUser(1).subscribe()
+    this.usersService.postUser({
+      email: 'janet.weaver@reqres.in',
+      first_name: 'Janet',
+      last_name: 'Weaver',
+      avatar: 'https://reqres.in/img/faces/2-image.jpg'
+    }).subscribe()
+    this.usersService.putUser(2, {
+      id: 2,
+      email: 'janet.weaver@reqres.in',
+      first_name: 'Janet',
+      last_name: 'Weaver',
+      avatar: 'https://reqres.in/img/faces/2-image.jpg'
+    }).subscribe()
+    this.usersService.patchUser(2, {
+      last_name: 'Weaver',
+      email: 'janet.weaver@reqres.in'
+    }).subscribe()
+    this.usersService.deleteUser(2).subscribe()
+
     this.$subscriptions.push(
-      this.usersService.getUsersObservable().subscribe((users) => { this.usersList = users })
+      this.usersService.getAllUser().subscribe((users) => { this.usersList = users; this.loading = false })
     )
   }
 

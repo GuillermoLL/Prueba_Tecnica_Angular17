@@ -38,17 +38,31 @@
             <a class="text-white/50 group-hover:text-white group-hover:smooth-hover text-center" href="#">Nuevo usuario</a>
           </div>
           <!-- Usuario -->
-          @for (user of usersList; track user) {
+        @if(!loading){
+            @for (user of usersList; track user) {
             @defer (on viewport) {
                 <app-user-card [user]="user"></app-user-card>
             } @placeholder {
                 <div class="relative group bg-gray-900 py-10 sm:py-20 px-4 flex justify-center space-y-2 items-center cursor-pointer rounded-md hover:smooth-hover hover:scale-95 duration-200 md:h-78">
-                    <div class="animate-spin inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-gray-400 rounded-full" role="status" aria-label="loading">
+                    <div class="animate-spin inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-gray-400 rounded-full"
+                        role="status" aria-label="loading">
                         <span class="sr-only">Loading...</span>
-                      </div>
+                    </div>
+                    </div>
+                    }}
+                    }@else {
+                    <div
+                        class="relative group bg-gray-900 py-10 sm:py-20 px-4 flex justify-center space-y-2 items-center cursor-pointer rounded-md hover:smooth-hover hover:scale-95 duration-200 md:h-78">
+                        <div class="animate-spin inline-block w-10 h-10 border-[3px] border-current border-t-transparent text-gray-400 rounded-full"
+                            role="status" aria-label="loading">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
-            }
-          }
+                }
         </div>
     </div>
 </div>
+<ng-template #loadingCard>
+
+</ng-template>
+<app-user-edit-modal></app-user-edit-modal>
