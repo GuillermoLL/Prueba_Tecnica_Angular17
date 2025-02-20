@@ -10,6 +10,5 @@ export class UserEditModalService {
 
   public toggleModal (): void {
     this.show.update((status) => !status)
-    console.log(this.show(), this.user())
   }
 }

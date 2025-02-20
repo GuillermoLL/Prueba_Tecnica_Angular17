@@ -1,7 +1,16 @@
 
-<div class="relative group bg-gray-900 py-10 sm:py-20 px-4 flex flex-col space-y-2 items-center cursor-pointer rounded-md hover:smooth-hover hover:scale-95 duration-200"
+<div class="relative group bg-gray-900 py-10 sm:py-20 px-4 flex flex-col space-y-2 items-center cursor-pointer rounded-md hover:smooth-hover hover:scale-95 duration-200 min-h-80 max-h-80"
     (click)="showEditModal()">
-    <img class="w-20 h-20 object-cover object-center rounded-full" src="{{user().avatar}}" alt="art" />
+    @if (user().avatar) {
+        <img class="w-20 h-20 object-cover object-center rounded-full" src="{{user().avatar}}" alt="art" />
+    }@else {
+    <svg aria-hidden="true" role="img" class="min-h-20 min-w-20 text-white/50 hover:text-white rounded-full mx-auto"
+        preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256">
+        <path fill="currentColor"
+            d="M172 120a44 44 0 1 1-44-44a44 44 0 0 1 44 44Zm60 8A104 104 0 1 1 128 24a104.2 104.2 0 0 1 104 104Zm-16 0a88 88 0 1 0-153.8 58.4a81.3 81.3 0 0 1 24.5-23a59.7 59.7 0 0 0 82.6 0a81.3 81.3 0 0 1 24.5 23A87.6 87.6 0 0 0 216 128Z">
+        </path>
+    </svg>
+    }
     <h4 class="text-white text-2xl font-bold capitalize text-center">{{user().first_name}} {{user().last_name}}</h4>
     <p class="text-white/50">{{user().email}}</p>
     <div class="flex">

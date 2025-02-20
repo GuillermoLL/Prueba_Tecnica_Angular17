@@ -23,25 +23,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   constructor (private readonly usersService: UsersService, private readonly modalService: UserEditModalService) { }
 
   ngOnInit (): void {
-    this.usersService.getUser(1).subscribe()
-    this.usersService.postUser({
-      email: 'janet.weaver@reqres.in',
-      first_name: 'Janet',
-      last_name: 'Weaver',
-      avatar: 'https://reqres.in/img/faces/2-image.jpg'
-    }).subscribe()
-    this.usersService.putUser(2, {
-      email: 'janet.weaver@reqres.in',
-      first_name: 'Janet',
-      last_name: 'Weaver',
-      avatar: 'https://reqres.in/img/faces/2-image.jpg'
-    }).subscribe()
-    this.usersService.patchUser(2, {
-      last_name: 'Weaver',
-      email: 'janet.weaver@reqres.in'
-    }).subscribe()
-    this.usersService.deleteUser(2).subscribe()
-
     this.$subscriptions.push(
       this.usersService.getAllUser().subscribe((users) => { this.usersList = users; this.loading = false })
     )

@@ -8,12 +8,16 @@ import { HttpClient } from '@angular/common/http'
 })
 export class UsersService {
   private readonly apiUrl = 'https://reqres.in/api/users'
-  private readonly $Users = new ReplaySubject<User[]>()
+  UsersList: User[] = []
+  $Users = new ReplaySubject<User[]>()
 
   constructor (private readonly http: HttpClient) {}
 
   getAllUser (): Observable<User[]> {
-    this.http.get<Response<User[]>>(this.apiUrl + '?per_page=8&delay=4').subscribe(resp => this.$Users.next(resp.data))
+    this.http.get<Response<User[]>>(this.apiUrl + '?per_page=8&delay=4').subscribe(resp => {
+      this.UsersList = resp.data
+      this.$Users.next(this.UsersList)
+    })
     return this.$Users
   }
 
