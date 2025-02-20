@@ -10,12 +10,16 @@ export class UsersService {
   private readonly apiUrl = 'https://reqres.in/api/users'
   UsersList: User[] = []
   $Users = new ReplaySubject<User[]>()
+  total: number = 0
+  page: number = 0
 
   constructor (private readonly http: HttpClient) {}
 
   getAllUser (): Observable<User[]> {
     this.http.get<Response<User[]>>(this.apiUrl + '?per_page=8&delay=4').subscribe(resp => {
       this.UsersList = resp.data
+      this.total = resp.total
+      this.page = resp.page
       this.$Users.next(this.UsersList)
     })
     return this.$Users

@@ -36,16 +36,18 @@
                             class="bg-transparent text-white/50 hover:text-white focus:text-white smooth-hover border rounded mb-5 mt-2 capitalize focus:outline-none focus:border-white font-normal w-full h-10 flex items-center pl-3" />
                     </div>
                     <div class="flex items-center justify-end">
-                        <button [disabled]="this.saving"
-                            class="bg-transparent text-green-400/50 rounded hover:text-green-400 smooth-hover border w-31 px-8 py-1.5"
-                            (click)="createEditUser()">
-                            @if (saving) {
-                            <div class="animate-spin inline-block pt-0.5 w-4 h-4 border-[2px] border-current border-t-transparent text-green-400 rounded-full"
-                                role="status" aria-label="loading">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                    } @else { Guardar }
-                    </button>
+                        @if (!editMode){
+                            <button [disabled]="this.saving"
+                                class="bg-transparent text-green-400/50 rounded hover:text-green-400 smooth-hover border w-31 px-8 py-1.5"
+                                (click)="createEditUser()">
+                                @if (saving) {
+                                <div class="animate-spin inline-block pt-0.5 w-4 h-4 border-[2px] border-current border-t-transparent text-green-400 rounded-full"
+                                    role="status" aria-label="loading">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                } @else { Guardar }
+                            </button>
+                        }
                     <button class="bg-transparent text-white/50 hover:text-white smooth-hover border rounded w-31 p-2 ml-3 px-8 py-1.5"
                         (click)="hideAnimation()"> Cancelar
                     </button>
