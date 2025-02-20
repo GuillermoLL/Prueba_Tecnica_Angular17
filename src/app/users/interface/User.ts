@@ -22,4 +22,5 @@ export interface User {
   'avatar': string
 }
 
+export type AddUser = Partial<Omit<User, 'id'>>
 export type UserResponse = Pick<Response<User>, 'data' | 'support'>

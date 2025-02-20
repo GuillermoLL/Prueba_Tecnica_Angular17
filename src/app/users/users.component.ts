@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { UserCardComponent } from './user-card/user-card.component'
-import { UserEditModalComponent } from './user-edit-modal/user-edit-modal.component'
 import { UsersService } from './users.service'
 import { User } from './interface/User'
 import { Subscription } from 'rxjs'
 import { HttpClientModule } from '@angular/common/http'
+import { UserEditModalComponent } from './user-edit-modal/user-edit-modal.component'
+import { UserEditModalService } from './user-edit-modal/user-edit-modal.service'
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, UserCardComponent, UserEditModalComponent, HttpClientModule],
+  imports: [CommonModule, UserCardComponent, HttpClientModule, UserEditModalComponent],
   providers: [UsersService],
   templateUrl: './users.component.html'
 })
@@ -19,7 +20,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   $subscriptions: Subscription[] = []
   loading = true
 
-  constructor (private readonly usersService: UsersService) { }
+  constructor (private readonly usersService: UsersService, private readonly modalService: UserEditModalService) { }
 
   ngOnInit (): void {
     this.usersService.getUser(1).subscribe()
@@ -30,7 +31,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       avatar: 'https://reqres.in/img/faces/2-image.jpg'
     }).subscribe()
     this.usersService.putUser(2, {
-      id: 2,
       email: 'janet.weaver@reqres.in',
       first_name: 'Janet',
       last_name: 'Weaver',
@@ -45,6 +45,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.$subscriptions.push(
       this.usersService.getAllUser().subscribe((users) => { this.usersList = users; this.loading = false })
     )
+  }
+
+  public showCreateModal (): void {
+    this.modalService.user.set({})
+    this.modalService.toggleModal()
   }
 
   ngOnDestroy (): void {
