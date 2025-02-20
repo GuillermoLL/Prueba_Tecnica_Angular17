@@ -12,14 +12,19 @@ export class UsersService {
   $Users = new ReplaySubject<User[]>()
   total: number = 0
   page: number = 0
+  totalPages: number = 0
 
   constructor (private readonly http: HttpClient) {}
 
-  getAllUser (): Observable<User[]> {
-    this.http.get<Response<User[]>>(this.apiUrl + '?per_page=8&delay=4').subscribe(resp => {
+  getAllUser (page: number = 1, perPage: number = 3): Observable<User[]> {
+    if (page <= 0) { page = 1 }
+    if (page <= 0) { page = 1 }
+
+    this.http.get<Response<User[]>>(this.apiUrl + `?per_page=${perPage}&page=${page}`).subscribe(resp => {
       this.UsersList = resp.data
       this.total = resp.total
       this.page = resp.page
+      this.totalPages = resp.total_pages
       this.$Users.next(this.UsersList)
     })
     return this.$Users

@@ -33,6 +33,24 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.modalService.toggleModal()
   }
 
+  public nextPage (): void {
+    if (this.usersService.page < this.usersService.totalPages) {
+      this.loading = true
+      this.$subscriptions.push(
+        this.usersService.getAllUser(this.usersService.page + 1).subscribe(() => { this.loading = false })
+      )
+    }
+  }
+
+  public previusPage (): void {
+    if (this.usersService.page > 1) {
+      this.loading = true
+      this.$subscriptions.push(
+        this.usersService.getAllUser(this.usersService.page - 1).subscribe(() => { this.loading = false })
+      )
+    }
+  }
+
   ngOnDestroy (): void {
     this.$subscriptions.forEach((sub) => sub.unsubscribe())
   }
