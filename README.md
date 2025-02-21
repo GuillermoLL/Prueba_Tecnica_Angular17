@@ -24,7 +24,7 @@ Primero asegúrate de que estas en la versión de node 18.17.0
 Después, instala todas las dependencias.
 
 ```console
-npm install
+npm install --force
 ```
 
 Y lanza el proyecto.
