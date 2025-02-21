@@ -1,0 +1,11 @@
+services:
+  angular-laberit:
+    image: guillermolillo/laberit-prueba:18.17.0
+    container_name: laberit-prueba-container
+    ports:
+      - 4200:4200
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROYECTNAME: angular-laberit

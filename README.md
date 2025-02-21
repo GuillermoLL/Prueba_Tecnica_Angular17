@@ -6,6 +6,7 @@ Este proyecto esta utilizando la versión de Angular 17.3.8
 ## Lanzar el proyecto
   
 **Con Docker**
+
 En el repositorio vienen el archivo Dockerfile y el docker-compose.yml.
 
 Dirígete la carpeta donde clonaste el repositorio y ejecuta:
@@ -17,6 +18,7 @@ Se montara la imagen y el contenedor de la app.
 Una vez que termine de instalar dirígete a <http://localhost:4200> para revisar la app.
   
 **En local**
+
 Primero asegúrate de que estas en la versión de node 18.17.0
 
 Después, instala todas las dependencias.
