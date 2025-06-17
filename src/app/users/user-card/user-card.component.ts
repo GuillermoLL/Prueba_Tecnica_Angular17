@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core'
+import { Component, inject, input } from '@angular/core'
 import { User } from '../interface/User'
 import { UserEditModalService } from '../user-edit-modal/user-edit-modal.service'
 
@@ -9,9 +9,8 @@ import { UserEditModalService } from '../user-edit-modal/user-edit-modal.service
   templateUrl: './user-card.component.html'
 })
 export class UserCardComponent {
+  private readonly editModalService = inject(UserEditModalService)
   user = input.required<User>()
-
-  constructor (private readonly editModalService: UserEditModalService) {}
 
   public showEditModal (): void {
     this.editModalService.user.set(this.user())

@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, viewChild } from '@angular/core'
+import { Component, effect, ElementRef, inject, viewChild } from '@angular/core'
 import { UserEditModalService } from './user-edit-modal.service'
 import { AddUser, User } from '../interface/User'
 import { UsersService } from '../users.service'
@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms'
   templateUrl: './user-edit-modal.component.html'
 })
 export class UserEditModalComponent {
+  private readonly modalService = inject(UserEditModalService)
+  private readonly usersService = inject(UsersService)
+
   modal = viewChild.required<ElementRef>('modal')
 
   user: AddUser | User
@@ -18,7 +21,7 @@ export class UserEditModalComponent {
   editMode: boolean = false
   saving: boolean = false
 
-  constructor (private readonly modalService: UserEditModalService, private readonly usersService: UsersService) {
+  constructor () {
     this.user = {}
     this.id = 0
 
@@ -26,10 +29,10 @@ export class UserEditModalComponent {
       if (this.modalService.show()) { this.showAnimation() }
     })
     effect(() => {
-      this.user = modalService.user()
+      this.user = this.modalService.user()
       if (Object.keys(this.user).length > 0) {
         this.editMode = true
-        this.id = (modalService.user() as User).id
+        this.id = (this.modalService.user() as User).id
       } else {
         this.editMode = false
       }

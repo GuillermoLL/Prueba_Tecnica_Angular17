@@ -1,26 +1,26 @@
 import { CommonModule } from '@angular/common'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import { UserCardComponent } from './user-card/user-card.component'
 import { UsersService } from './users.service'
 import { User } from './interface/User'
 import { Subscription } from 'rxjs'
-import { HttpClientModule } from '@angular/common/http'
 import { UserEditModalComponent } from './user-edit-modal/user-edit-modal.component'
 import { UserEditModalService } from './user-edit-modal/user-edit-modal.service'
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, UserCardComponent, HttpClientModule, UserEditModalComponent],
+  imports: [CommonModule, UserCardComponent, UserEditModalComponent],
   providers: [UsersService],
   templateUrl: './users.component.html'
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  private readonly usersService = inject(UsersService)
+  private readonly modalService = inject(UserEditModalService)
+
   usersList: User[] = []
   $subscriptions: Subscription[] = []
   loading = true
-
-  constructor (private readonly usersService: UsersService, private readonly modalService: UserEditModalService) { }
 
   ngOnInit (): void {
     this.$subscriptions.push(

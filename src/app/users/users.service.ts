@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { inject, Injectable } from '@angular/core'
 import { map, Observable, ReplaySubject } from 'rxjs'
 import { EditResponse, User, UserResponse, Response, AddUser } from './interface/User'
 import { HttpClient } from '@angular/common/http'
@@ -7,17 +7,16 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class UsersService {
+  private readonly http = inject(HttpClient)
   private readonly apiUrl = 'https://reqres.in/api/users'
+
   UsersList: User[] = []
   $Users = new ReplaySubject<User[]>()
   total: number = 0
   page: number = 0
   totalPages: number = 0
 
-  constructor (private readonly http: HttpClient) {}
-
   getAllUser (page: number = 1, perPage: number = 3): Observable<User[]> {
-    if (page <= 0) { page = 1 }
     if (page <= 0) { page = 1 }
 
     this.http.get<Response<User[]>>(this.apiUrl + `?per_page=${perPage}&page=${page}`).subscribe(resp => {
