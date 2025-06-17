@@ -1,5 +1,5 @@
 
-# Angular Laberit
+# Angular 17
 
 Este proyecto esta utilizando la versión de Angular 17.3.8
 
