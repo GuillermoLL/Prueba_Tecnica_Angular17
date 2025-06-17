@@ -1,0 +1,11 @@
+services:
+  angular-prueba-tecnica:
+    image: guillermolillo/prueba-tecnica:18.17.0
+    container_name: container-prueba-tecnica
+    ports:
+      - 4200:4200
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROYECTNAME: angular-prueba-tecnica
